@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "btree.h"
+#include "repl.h"
 
 int main() {
     Node* root = NULL;
@@ -13,7 +14,7 @@ int main() {
     } else {
         printf("Node not found.\n");
     }
-
+    startREPL(root);
     freeTree(root);
     return 0;
 }
