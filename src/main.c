@@ -1,11 +1,19 @@
 #include <stdio.h>
-
-void initBTree();
-void startREPL();
+#include "btree.h"
 
 int main() {
-    printf("Hello, World!\n");
-    initBTree();
-    startREPL();
+    Node* root = NULL;
+    root = insertNode(root, 10);
+    insertNode(root, 5);
+    insertNode(root, 20);
+
+    Node* found = searchNode(root, 5);
+    if (found != NULL) {
+        printf("Node found with key: %d\n", found->key);
+    } else {
+        printf("Node not found.\n");
+    }
+
+    freeTree(root);
     return 0;
 }
