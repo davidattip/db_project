@@ -11,5 +11,7 @@ Node* createNode(int key);
 Node* insertNode(Node* root, int key);
 Node* searchNode(Node* root, int key);  // Ajoute cette déclaration
 void freeTree(Node* root);
+Node* deleteNode(Node* root, int key);
+
 
 #endif

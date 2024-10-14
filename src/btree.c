@@ -38,3 +38,35 @@ void freeTree(Node* root) {
         free(root);
     }
 }
+
+Node* deleteNode(Node* root, int key) {
+    if (root == NULL) return root;
+
+    if (key < root->key) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->key) {
+        root->right = deleteNode(root->right, key);
+    } else {
+        // Cas où le nœud n'a qu'un enfant ou pas d'enfant
+        if (root->left == NULL) {
+            Node* temp = root->right;
+            free(root);
+            return temp;
+        } else if (root->right == NULL) {
+            Node* temp = root->left;
+            free(root);
+            return temp;
+        }
+
+        // Cas où le nœud a deux enfants
+        Node* temp = root->right;
+        while (temp && temp->left != NULL) {
+            temp = temp->left;
+        }
+
+        root->key = temp->key;
+        root->right = deleteNode(root->right, temp->key);
+    }
+    return root;
+}
+

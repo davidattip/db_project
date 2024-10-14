@@ -25,8 +25,12 @@ void startREPL(Node* root) {
             } else {
                 printf("Valeur %d non trouvée dans l'arbre.\n", value);
             }
+        } else if (sscanf(command, "DELETE %d", &value) == 1) {
+            root = deleteNode(root, value);
+            printf("Valeur %d supprimée de l'arbre.\n", value);
         } else {
-            printf("Commande non reconnue. Utilisez 'INSERT <valeur>', 'SEARCH <valeur>', ou 'exit'.\n");
+            printf("Commande non reconnue. Utilisez 'INSERT <valeur>', 'SEARCH <valeur>', 'DELETE <valeur>', ou 'exit'.\n");
         }
     }
 }
+
