@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h> 
 #include "btree.h"
 
 Node* createNode(int key) {
@@ -70,3 +71,35 @@ Node* deleteNode(Node* root, int key) {
     return root;
 }
 
+void displayTree(Node* root, int space) {
+    if (root == NULL) return;
+
+    space += 5;
+    displayTree(root->right, space);
+    printf("\n");
+    for (int i = 5; i < space; i++) printf(" ");
+    printf("%d\n", root->key);
+    displayTree(root->left, space);
+}
+
+void saveTree(Node* root, FILE* file) {
+    if (root == NULL) {
+        fprintf(file, "NULL\n");
+        return;
+    }
+    fprintf(file, "%d\n", root->key);
+    saveTree(root->left, file);
+    saveTree(root->right, file);
+}
+
+Node* loadTree(FILE* file) {
+    char buffer[256];
+    if (!fgets(buffer, sizeof(buffer), file) || strncmp(buffer, "NULL", 4) == 0) {
+        return NULL;
+    }
+    int key = atoi(buffer);
+    Node* root = createNode(key);
+    root->left = loadTree(file);
+    root->right = loadTree(file);
+    return root;
+}

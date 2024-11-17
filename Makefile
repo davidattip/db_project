@@ -16,4 +16,4 @@ src/repl.o: src/repl.c
 	$(CC) $(CFLAGS) -c src/repl.c -o src/repl.o
 
 clean:
-	rm -f src/*.o main
+	rm -f src/*.o main tests
